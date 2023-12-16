@@ -22,7 +22,7 @@ class PepSpider(scrapy.Spider):
         status = response.css('dt:contains("Status") + dd abbr::text').get()
         data = {
             'number': number,
-            'title': title,
+            'name': title,
             'status': status,
         }
         yield PepParseItem(data)
