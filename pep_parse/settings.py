@@ -9,7 +9,9 @@ ROBOTSTXT_OBEY = True
 
 BASE_DIR = Path(__file__).parent.parent
 
-JOBDIR = 'results'
+RESULTS = 'results'
+
+JOBDIR = BASE_DIR / RESULTS
 
 ITEM_PIPELINES = {
     "pep_parse.pipelines.PepParsePipeline": 300,
@@ -19,7 +21,7 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 FEEDS = {
-    JOBDIR / 'pep_%(time)s.csv': {
+    f'{BASE_DIR}/{RESULTS}/pep_%(time)s.csv': {
         'format': 'csv',
         'fields': ['number', 'name', 'status'],
         'overwrite': True

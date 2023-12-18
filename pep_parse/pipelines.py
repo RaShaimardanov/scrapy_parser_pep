@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 
-from pep_parse.settings import DT_FORMAT, JOBDIR
+from pep_parse.settings import DT_FORMAT, BASE_DIR, RESULTS
 
 
 class PepParsePipeline:
@@ -18,7 +18,8 @@ class PepParsePipeline:
         now_time = datetime.now().strftime(DT_FORMAT)
         filename = f'status_summary_{now_time}.csv'
         with open(
-            JOBDIR / filename, mode="w", encoding='utf-8', newline=''
+            BASE_DIR / RESULTS / filename,
+            mode="w", encoding='utf-8', newline=''
         ) as csvfile:
             writer = csv.writer(csvfile)
             writer.writerows(
