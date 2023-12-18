@@ -20,6 +20,7 @@ git clone https://github.com/RaShaimardanov/scrapy_parser_pep.git
 ```
 2. Установите и активируйте виртуальное окружение:
 ```bash
+cd scrapy_parser_pep
 python -m venv venv
 source venv/Scripts/activate
 ```
@@ -34,4 +35,4 @@ scrapy crawl pep
 
 
 ## Автор проекта:
-Расим Шаймарданов
+[Расим Шаймарданов](https://github.com/RaShaimardanov)

@@ -1,3 +1,4 @@
+from re import match
 import scrapy
 
 from pep_parse.items import PepParseItem
@@ -6,13 +7,12 @@ from pep_parse.items import PepParseItem
 class PepSpider(scrapy.Spider):
     name = "pep"
     allowed_domains = ["peps.python.org"]
-    start_urls = ['https://peps.python.org/']
+    start_urls = [f'https://{domain}/' for domain in allowed_domains]
 
     def parse(self, response):
-        rows = response.css('table.pep-zero-table tbody tr')
-        for row in rows:
-            link = row.css('td:nth-child(2) a::attr(href)').get()
-
+        for link in response.css(
+            'section#numerical-index tbody > tr a[href*="pep-"]'
+        ):
             yield response.follow(link, callback=self.parse_pep)
 
     def parse_pep(self, response):
@@ -20,9 +20,4 @@ class PepSpider(scrapy.Spider):
         number = row[0].split(' ')[1]
         title = row[1]
         status = response.css('dt:contains("Status") + dd abbr::text').get()
-        data = {
-            'number': number,
-            'name': title,
-            'status': status,
-        }
-        yield PepParseItem(data)
+        yield PepParseItem(number=number, name=title, status=status)
