@@ -1,4 +1,3 @@
-from re import match
 import scrapy
 
 from pep_parse.items import PepParseItem
