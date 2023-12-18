@@ -11,8 +11,6 @@ BASE_DIR = Path(__file__).parent.parent
 
 RESULTS = 'results'
 
-JOBDIR = BASE_DIR / RESULTS
-
 ITEM_PIPELINES = {
     "pep_parse.pipelines.PepParsePipeline": 300,
 }
@@ -29,3 +27,4 @@ FEEDS = {
 }
 
 DT_FORMAT = '%Y-%m-%dT%H-%M-%S'
+ENCODING = 'UTF-8'
